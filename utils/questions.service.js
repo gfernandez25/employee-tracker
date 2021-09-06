@@ -23,8 +23,10 @@ const addDepartment = {
     type: 'input',
     name: 'departmentName',
     message: 'Please enter the new Department Name',
-    validate: titleInput => {
-        return !!titleInput
+    validate: departmentName => {
+        if ((!departmentName) || (!!isNaN(departmentName))) {
+            return !!departmentName
+        }
     }
 }
 
@@ -32,12 +34,24 @@ const addDepartment = {
 const addRole = {
     type: 'input',
     name: 'roleName',
-    message: 'Please enter the new role'
+    message: 'Please enter the new role name',
+    validate: roleInput => {
+        if ((!roleInput) || (!isNaN(roleInput))) {
+            return "Please enter only letters"
+        }
+        return true;
+    }
 }
 const addRoleSalary = {
     type: 'input',
     name: 'roleSalary',
-    message: 'Please enter the salary for the role'
+    message: 'Please enter the salary for the role',
+    validate: roleSalary => {
+        if ((!roleSalary) || (isNaN(roleSalary))) {
+            return "please enter a number";
+        }
+        return true;
+    }
 }
 
 async function addRoleDepartment() {
@@ -45,7 +59,7 @@ async function addRoleDepartment() {
         type: 'list',
         name: 'roleDepartment',
         message: 'Please select the department this role will belong to ',
-        choices: await queryService.getRolesList()
+        choices: await queryService.getDepartmentsList()
     }
 }
 
@@ -53,12 +67,24 @@ async function addRoleDepartment() {
 const addEmployeeFirstName = {
     type: 'input',
     name: 'employeeFirstName',
-    message: 'Please enter the employee\'s first Name'
+    message: 'Please enter the employee\'s first Name',
+    validate: employeeFirstName => {
+        if ((!employeeFirstName) || (!isNaN(employeeFirstName))) {
+            return "Please enter only letters"
+        }
+        return true;
+    }
 }
 const addEmployeelastName = {
     type: 'input',
     name: 'employeeLastName',
-    message: 'Please enter the employee\'s last Name'
+    message: 'Please enter the employee\'s last Name',
+    validate: employeeLastName => {
+        if ((!employeeLastName) || (!isNaN(employeeLastName))) {
+            return "Please enter only letters"
+        }
+        return true;
+    }
 }
 
 async function addEmployeeRole() {
@@ -88,12 +114,6 @@ async function selectEmployee() {
     }
 }
 
-
-//update an employee role question set
-//display employee list
-//question to select employee id
-//question to select new role
-//display confirmation message
 
 
 const generateInitialQuestion = function () {

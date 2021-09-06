@@ -10,10 +10,10 @@ const db = mysql.createConnection({
 
 const queries = {
     getDepartmentsQuery: `SELECT * FROM department;`,
+    getDepartmentsListQuery: `SELECT id AS "value", name FROM department;`,
     getAllRolesQuery: `SELECT * FROM role;`,
     getRolesListQuery: `SELECT id AS "value", title AS "name" FROM role;`,
     getEmployeeListQuery: `SELECT id AS "value", CONCAT(first_name, " ", last_name) AS "name" FROM employee;`,
-    //todo: fix employee table query
     getEmployeesQuery: `
         SELECT
             employee.first_name,
@@ -44,6 +44,10 @@ const queries = {
 // ----------------------------------------------------------
 async function getDepartments() {
     return await submitQuery(queries.getDepartmentsQuery)
+}
+
+async function getDepartmentsList() {
+    return await submitQuery(queries.getDepartmentsListQuery)
 }
 
 async function getAllRoles() {
@@ -90,6 +94,7 @@ async function submitQuery(queryString) {
 
 module.exports = {
     getDepartments,
+    getDepartmentsList,
     getAllRoles,
     getRolesList,
     getEmployees,
