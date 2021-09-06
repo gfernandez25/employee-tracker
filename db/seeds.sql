@@ -32,5 +32,6 @@ VALUES ('James', 'Fraser', 1, NULL),
        ('Samuel', 'Johnson', 5, NULL),
        ('John', 'Dryden', 6, NUll),
        ('Alexander', 'Pope', 7, 17),
-       ('Lionel', 'Johnson', 7, 17);
+       ('Lionel', 'Johnson', 7, 17),
+       ('None', '', NULL, NULL);
 
