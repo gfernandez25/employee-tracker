@@ -11,7 +11,11 @@ const db = mysql.createConnection({
 const queries = {
     getDepartmentsQuery: `SELECT * FROM department;`,
     getDepartmentsListQuery: `SELECT id AS "value", name FROM department;`,
-    getAllRolesQuery: `SELECT * FROM role;`,
+    getAllRolesQuery: `
+        SELECT role.id, role.title, salary, name AS department_name 
+        FROM employee_tracker.role
+        INNER JOIN department
+        ON role.department_id=department.id;`,
     getRolesListQuery: `SELECT id AS "value", title AS "name" FROM role;`,
     getEmployeeListQuery: `SELECT id AS "value", CONCAT(first_name, " ", last_name) AS "name" FROM employee;`,
     getEmployeesQuery: `
@@ -25,7 +29,7 @@ const queries = {
         FROM employee
         INNER JOIN role ON role.id=employee.role_id
         INNER JOIN department ON role.department_id=department.id
-        LEFT JOIN employee m ON employee.manager_id=m.id;`,
+        LEFT JOIN employee m ON employee.manager_id=m.id ORDER BY employee.id;`,
     addDepartmentQuery: (departmentName) => `
         INSERT INTO department (name) 
         VALUES ("${departmentName}");`,
